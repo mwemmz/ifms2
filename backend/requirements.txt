@@ -10,3 +10,5 @@ pandas
 numpy
 scikit-learn
 python-dotenv
+psutil
+user-agents
