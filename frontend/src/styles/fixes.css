@@ -1,0 +1,44 @@
+/* Global fixes for z-index and positioning issues */
+
+/* Ensure body doesn't interfere with auth pages */
+body.auth-page {
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+}
+
+/* Fix for any potential layout conflicts */
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Ensure auth pages take full precedence */
+.auth-route {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  z-index: 9999 !important;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+/* Fix for any overlay issues */
+.modal-overlay {
+  z-index: 10001 !important;
+}
+
+/* Ensure inputs are visible */
+input, button {
+  z-index: 10;
+  position: relative;
+}
+
+/* Fix for any transform issues */
+.auth-container {
+  transform: none !important;
+  backface-visibility: hidden;
+  -webkit-font-smoothing: antialiased;
+}
