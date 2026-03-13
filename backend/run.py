@@ -18,7 +18,7 @@ if __name__ == '__main__':
     for rule in app.url_map.iter_rules():
         print(f"   {rule.methods} {rule}")
     
-    print("\n✅ Server running at: http://127.0.0.1:5000")
+    port = int(os.environ.get("PORT", 5000))
+    print(f"\n✅ Server running at: http://0.0.0.0:{port}")
     print("="*50 + "\n")
-    
-    app.run(debug=True, port=5000)
+    app.run(debug=True, host="0.0.0.0", port=port)
