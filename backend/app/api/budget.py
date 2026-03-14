@@ -1,6 +1,7 @@
 from flask import Blueprint, request, jsonify
 from flask_jwt_extended import jwt_required, get_jwt_identity
 from app.services.budget import BudgetPlanner
+from app.models.user import User
 from datetime import datetime
 from datetime import  timedelta
 budget_bp = Blueprint('budget', __name__)
@@ -10,6 +11,23 @@ budget_bp = Blueprint('budget', __name__)
 def get_monthly_budget():
     """Generate monthly budget"""
     try:
+        user = User.query.get(user_id)
+        if not user or not user.profile or not user.profile.monthly_salary:
+            # Return default status object
+            return jsonify({
+                'period': None,
+                'total_budget': 0,
+                'spent_so_far': 0,
+                'remaining': 0,
+                'days_remaining': 0,
+                'daily_budget': 0,
+                'expected_spent': 0,
+                'on_track': False,
+                'percent_used': 0,
+                'percent_time_passed': 0,
+                'category_status': [],
+                'message': 'Monthly salary not set. Please update your profile.'
+            }), 200
         user_id = get_jwt_identity()
         
         # Get query parameters
