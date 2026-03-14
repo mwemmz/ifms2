@@ -171,7 +171,16 @@ def get_emergency_fund_status():
         if not user:
             return jsonify({'error': 'User not found'}), 404
         if not user.profile or not user.profile.monthly_salary:
-            return jsonify({'error': 'Monthly salary not set'}), 404
+            # Return default emergency fund object
+            return jsonify({
+                'current_amount': 0,
+                'monthly_expenses_estimate': 0,
+                'months_covered': 0,
+                'target_months': advisor.EMERGENCY_FUND_MONTHS,
+                'target_amount': 0,
+                'status': 'missing',
+                'message': 'Monthly salary not set'
+            }), 200
         
         emergency_fund = advisor._calculate_emergency_fund()
         monthly_expenses = user.profile.monthly_salary * 0.7  # Estimate
