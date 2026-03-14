@@ -183,24 +183,38 @@ def get_current_budget_status():
         planner = BudgetPlanner(user_id)
         
         # Get current date
+        user_id = get_jwt_identity()
+        from app.models.user import User
+        user = User.query.get(user_id)
+        if not user or not user.profile or not user.profile.monthly_salary:
+            # Return default status object
+            return jsonify({
+                'period': None,
+                'total_budget': 0,
+                'spent_so_far': 0,
+                'remaining': 0,
+                'days_remaining': 0,
+                'daily_budget': 0,
+                'expected_spent': 0,
+                'on_track': False,
+                'percent_used': 0,
+                'percent_time_passed': 0,
+                'category_status': [],
+                'message': 'Monthly salary not set. Please update your profile.'
+            }), 200
+
+        planner = BudgetPlanner(user_id)
         now = datetime.now()
-        
-        # Get budget for current month
         budget = planner.generate_monthly_budget(now.month, now.year)
-        
-        # Get spending so far this month
         start_date = datetime(now.year, now.month, 1)
         current_spending = planner.analyzer.get_category_breakdown(start_date, now)
-        
-        # Calculate progress
         total_spent_so_far = sum(cat['total'] for cat in current_spending.values())
         days_passed = now.day
         days_in_month = (datetime(now.year, now.month + 1, 1) - timedelta(days=1)).day if now.month < 12 else 31
-        
+
         if 'error' not in budget:
             daily_budget = budget['summary']['total_budgeted'] / days_in_month
             expected_spent = daily_budget * days_passed
-            
             status = {
                 'period': budget['period'],
                 'total_budget': budget['summary']['total_budgeted'],
@@ -213,23 +227,18 @@ def get_current_budget_status():
                 'percent_used': round((total_spent_so_far / budget['summary']['total_budgeted']) * 100, 1) if budget['summary']['total_budgeted'] > 0 else 0,
                 'percent_time_passed': round((days_passed / days_in_month) * 100, 1)
             }
-            
-            # Category status
             category_status = []
             for category, budget_data in budget['category_budgets'].items():
                 spent = current_spending.get(category, {}).get('total', 0)
                 allocated = budget_data['allocated']
-                
                 if allocated > 0:
                     percent_used = (spent / allocated) * 100
-                    
                     if percent_used > 100:
                         status_flag = 'over_budget'
                     elif percent_used > 75:
                         status_flag = 'caution'
                     else:
                         status_flag = 'good'
-                    
                     category_status.append({
                         'category': category,
                         'budgeted': allocated,
@@ -238,9 +247,9 @@ def get_current_budget_status():
                         'percent_used': round(percent_used, 1),
                         'status': status_flag
                     })
-            
             status['category_status'] = sorted(category_status, key=lambda x: x['percent_used'], reverse=True)
-            
+            return jsonify(status), 200
+        return jsonify({'error': 'Could not generate budget status'}), 400
             return jsonify(status), 200
         
         return jsonify({'error': 'Could not generate budget status'}), 400
