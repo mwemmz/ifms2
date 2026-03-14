@@ -63,7 +63,7 @@ class AdviceService {
 
   async getGoalProgress() {
     try {
-      const response = await api.get('/advice/goal-progress');
+      const response = await api.get('/api/advice/goal-progress');
       return response.data;
     } catch (error) {
       console.error('Failed to fetch goal progress:', error);
@@ -73,7 +73,7 @@ class AdviceService {
 
   async getEmergencyFundStatus() {
     try {
-      const response = await api.get('/advice/emergency-fund');
+      const response = await api.get('/api/advice/emergency-fund');
       return response.data;
     } catch (error) {
       console.error('Failed to fetch emergency fund status:', error);
