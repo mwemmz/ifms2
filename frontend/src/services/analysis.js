@@ -4,7 +4,7 @@ class AnalysisService {
   async getCategoryBreakdown(params = {}) {
     try {
       const queryParams = new URLSearchParams(params).toString();
-      const url = `/analysis/category-breakdown${queryParams ? `?${queryParams}` : ''}`;
+      const url = `/api/analysis/category-breakdown${queryParams ? `?${queryParams}` : ''}`;
       const response = await api.get(url);
       return response.data;
     } catch (error) {
@@ -16,7 +16,7 @@ class AnalysisService {
   async getMonthlySummary(params = {}) {
     try {
       const queryParams = new URLSearchParams(params).toString();
-      const url = `/analysis/monthly-summary${queryParams ? `?${queryParams}` : ''}`;
+      const url = `/api/analysis/monthly-summary${queryParams ? `?${queryParams}` : ''}`;
       const response = await api.get(url);
       return response.data;
     } catch (error) {
@@ -28,7 +28,7 @@ class AnalysisService {
   async getTrends(params = {}) {
     try {
       const queryParams = new URLSearchParams(params).toString();
-      const url = `/analysis/trends${queryParams ? `?${queryParams}` : ''}`;
+      const url = `/api/analysis/trends${queryParams ? `?${queryParams}` : ''}`;
       const response = await api.get(url);
       return response.data;
     } catch (error) {
@@ -40,7 +40,7 @@ class AnalysisService {
   async getTopCategories(params = {}) {
     try {
       const queryParams = new URLSearchParams(params).toString();
-      const url = `/analysis/top-categories${queryParams ? `?${queryParams}` : ''}`;
+      const url = `/api/analysis/top-categories${queryParams ? `?${queryParams}` : ''}`;
       const response = await api.get(url);
       return response.data;
     } catch (error) {
@@ -52,7 +52,7 @@ class AnalysisService {
   async comparePeriods(params = {}) {
     try {
       const queryParams = new URLSearchParams(params).toString();
-      const url = `/analysis/compare${queryParams ? `?${queryParams}` : ''}`;
+      const url = `/api/analysis/compare${queryParams ? `?${queryParams}` : ''}`;
       const response = await api.get(url);
       return response.data;
     } catch (error) {

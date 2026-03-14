@@ -79,7 +79,7 @@ class ProfileService {
   }
    async changePassword(passwordData) {
     try {
-      const response = await api.post('/auth/change-password', passwordData);
+      const response = await api.post('/api/auth/change-password', passwordData);
       return response.data;
     } catch (error) {
       console.error('Failed to change password:', error);
@@ -89,7 +89,7 @@ class ProfileService {
   // Logout all sessions
   async logoutAllSessions() {
     try {
-      const response = await api.delete('/security/sessions/all');
+      const response = await api.delete('/api/security/sessions/all');
       return response.data;
     } catch (error) {
       console.error('Failed to logout all sessions:', error);

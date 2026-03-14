@@ -3,7 +3,7 @@ import api from './api';
 class AdviceService {
   async getHealthScore() {
     try {
-      const response = await api.get('/advice/health-score');
+      const response = await api.get('/api/advice/health-score');
       return response.data;
     } catch (error) {
       console.error('Failed to fetch health score:', error);
@@ -13,7 +13,7 @@ class AdviceService {
 
   async getRecommendations() {
     try {
-      const response = await api.get('/advice/recommendations');
+      const response = await api.get('/api/advice/recommendations');
       return response.data;
     } catch (error) {
       console.error('Failed to fetch recommendations:', error);
@@ -23,7 +23,7 @@ class AdviceService {
 
   async getBudgetSuggestions() {
     try {
-      const response = await api.get('/advice/budget-suggestions');
+      const response = await api.get('/api/advice/budget-suggestions');
       return response.data;
     } catch (error) {
       console.error('Failed to fetch budget suggestions:', error);
@@ -33,7 +33,7 @@ class AdviceService {
 
   async getOverspending() {
     try {
-      const response = await api.get('/advice/overspending');
+      const response = await api.get('/api/advice/overspending');
       return response.data;
     } catch (error) {
       console.error('Failed to fetch overspending:', error);
@@ -43,7 +43,7 @@ class AdviceService {
 
   async getSavingsOpportunities() {
     try {
-      const response = await api.get('/advice/savings-opportunities');
+      const response = await api.get('/api/advice/savings-opportunities');
       return response.data;
     } catch (error) {
       console.error('Failed to fetch savings opportunities:', error);
@@ -53,7 +53,7 @@ class AdviceService {
 
   async getFinancialInsights() {
     try {
-      const response = await api.get('/advice/insights');
+      const response = await api.get('/api/advice/insights');
       return response.data;
     } catch (error) {
       console.error('Failed to fetch financial insights:', error);

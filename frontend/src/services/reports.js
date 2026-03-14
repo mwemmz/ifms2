@@ -4,7 +4,7 @@ class ReportsService {
   async getMonthlyReport(params = {}) {
     try {
       const queryParams = new URLSearchParams(params).toString();
-      const url = `/reports/monthly${queryParams ? `?${queryParams}` : ''}`;
+      const url = `/api/reports/monthly${queryParams ? `?${queryParams}` : ''}`;
       const response = await api.get(url);
       return response.data;
     } catch (error) {
@@ -16,7 +16,7 @@ class ReportsService {
   async getYearlyReport(params = {}) {
     try {
       const queryParams = new URLSearchParams(params).toString();
-      const url = `/reports/yearly${queryParams ? `?${queryParams}` : ''}`;
+      const url = `/api/reports/yearly${queryParams ? `?${queryParams}` : ''}`;
       const response = await api.get(url);
       return response.data;
     } catch (error) {
@@ -28,7 +28,7 @@ class ReportsService {
   async getCategoryReport(params = {}) {
     try {
       const queryParams = new URLSearchParams(params).toString();
-      const url = `/reports/category${queryParams ? `?${queryParams}` : ''}`;
+      const url = `/api/reports/category${queryParams ? `?${queryParams}` : ''}`;
       const response = await api.get(url);
       return response.data;
     } catch (error) {
@@ -40,7 +40,7 @@ class ReportsService {
   async compareYears(params = {}) {
     try {
       const queryParams = new URLSearchParams(params).toString();
-      const url = `/reports/compare-years${queryParams ? `?${queryParams}` : ''}`;
+      const url = `/api/reports/compare-years${queryParams ? `?${queryParams}` : ''}`;
       const response = await api.get(url);
       return response.data;
     } catch (error) {
@@ -52,7 +52,7 @@ class ReportsService {
   async exportData(params = {}) {
     try {
       const queryParams = new URLSearchParams(params).toString();
-      const url = `/reports/export${queryParams ? `?${queryParams}` : ''}`;
+      const url = `/api/reports/export${queryParams ? `?${queryParams}` : ''}`;
       const response = await api.get(url);
       return response.data;
     } catch (error) {
