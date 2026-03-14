@@ -4,7 +4,7 @@ class PredictionService {
   async getNextMonthPrediction(params = {}) {
     try {
       const queryParams = new URLSearchParams(params).toString();
-      const url = `/predict/next-month${queryParams ? `?${queryParams}` : ''}`;
+      const url = `/api/predict/next-month${queryParams ? `?${queryParams}` : ''}`;
       const response = await api.get(url);
       return response.data;
     } catch (error) {
@@ -15,7 +15,7 @@ class PredictionService {
 
   async getCategoryPredictions() {
     try {
-      const response = await api.get('/predict/by-category');
+      const response = await api.get('/api/predict/by-category');
       return response.data;
     } catch (error) {
       console.error('Failed to fetch category predictions:', error);
@@ -26,7 +26,7 @@ class PredictionService {
   async getMovingAverage(params = {}) {
     try {
       const queryParams = new URLSearchParams(params).toString();
-      const url = `/predict/moving-average${queryParams ? `?${queryParams}` : ''}`;
+      const url = `/api/predict/moving-average${queryParams ? `?${queryParams}` : ''}`;
       const response = await api.get(url);
       return response.data;
     } catch (error) {
@@ -38,7 +38,7 @@ class PredictionService {
   async getPolynomialPrediction(params = {}) {
     try {
       const queryParams = new URLSearchParams(params).toString();
-      const url = `/predict/polynomial${queryParams ? `?${queryParams}` : ''}`;
+      const url = `/api/predict/polynomial${queryParams ? `?${queryParams}` : ''}`;
       const response = await api.get(url);
       return response.data;
     } catch (error) {
@@ -49,7 +49,7 @@ class PredictionService {
 
   async getEnsemblePrediction() {
     try {
-      const response = await api.get('/predict/ensemble');
+      const response = await api.get('/api/predict/ensemble');
       return response.data;
     } catch (error) {
       console.error('Failed to fetch ensemble prediction:', error);
@@ -60,7 +60,7 @@ class PredictionService {
   async getMultiMonthPrediction(params = {}) {
     try {
       const queryParams = new URLSearchParams(params).toString();
-      const url = `/predict/multi-month${queryParams ? `?${queryParams}` : ''}`;
+      const url = `/api/predict/multi-month${queryParams ? `?${queryParams}` : ''}`;
       const response = await api.get(url);
       return response.data;
     } catch (error) {
@@ -71,7 +71,7 @@ class PredictionService {
 
   async getPredictionInsights() {
     try {
-      const response = await api.get('/predict/insights');
+      const response = await api.get('/api/predict/insights');
       return response.data;
     } catch (error) {
       console.error('Failed to fetch prediction insights:', error);
@@ -81,7 +81,7 @@ class PredictionService {
 
   async getPredictionHealth() {
     try {
-      const response = await api.get('/predict/health');
+      const response = await api.get('/api/predict/health');
       return response.data;
     } catch (error) {
       console.error('Failed to fetch prediction health:', error);

@@ -4,7 +4,7 @@ class BudgetService {
   async getMonthlyBudget(params = {}) {
     try {
       const queryParams = new URLSearchParams(params).toString();
-      const url = `/budget/monthly${queryParams ? `?${queryParams}` : ''}`;
+      const url = `/api/budget/monthly${queryParams ? `?${queryParams}` : ''}`;
       const response = await api.get(url);
       return response.data;
     } catch (error) {
@@ -16,7 +16,7 @@ class BudgetService {
   async compareBudgetActual(params = {}) {
     try {
       const queryParams = new URLSearchParams(params).toString();
-      const url = `/budget/compare${queryParams ? `?${queryParams}` : ''}`;
+      const url = `/api/budget/compare${queryParams ? `?${queryParams}` : ''}`;
       const response = await api.get(url);
       return response.data;
     } catch (error) {
@@ -28,7 +28,7 @@ class BudgetService {
   async getFutureBudgets(params = {}) {
     try {
       const queryParams = new URLSearchParams(params).toString();
-      const url = `/budget/future${queryParams ? `?${queryParams}` : ''}`;
+      const url = `/api/budget/future${queryParams ? `?${queryParams}` : ''}`;
       const response = await api.get(url);
       return response.data;
     } catch (error) {
@@ -39,7 +39,7 @@ class BudgetService {
 
   async getBudgetRecommendations() {
     try {
-      const response = await api.get('/budget/recommendations');
+      const response = await api.get('/api/budget/recommendations');
       return response.data;
     } catch (error) {
       console.error('Failed to fetch budget recommendations:', error);
@@ -49,7 +49,7 @@ class BudgetService {
 
   async createSmartBudget(data) {
     try {
-      const response = await api.post('/budget/smart', data);
+      const response = await api.post('/api/budget/smart', data);
       return response.data;
     } catch (error) {
       console.error('Failed to create smart budget:', error);
@@ -60,7 +60,7 @@ class BudgetService {
   async getBudgetHistory(params = {}) {
     try {
       const queryParams = new URLSearchParams(params).toString();
-      const url = `/budget/history${queryParams ? `?${queryParams}` : ''}`;
+      const url = `/api/budget/history${queryParams ? `?${queryParams}` : ''}`;
       const response = await api.get(url);
       return response.data;
     } catch (error) {
@@ -71,7 +71,7 @@ class BudgetService {
 
   async getCurrentBudgetStatus() {
     try {
-      const response = await api.get('/budget/current-status');
+      const response = await api.get('/api/budget/current-status');
       return response.data;
     } catch (error) {
       console.error('Failed to fetch current budget status:', error);

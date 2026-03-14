@@ -63,7 +63,7 @@ class AnalysisService {
 
   async getSpendingPatterns() {
     try {
-      const response = await api.get('/analysis/patterns');
+      const response = await api.get('/api/analysis/patterns');
       return response.data;
     } catch (error) {
       console.error('Failed to fetch spending patterns:', error);
@@ -73,7 +73,7 @@ class AnalysisService {
 
   async getInsights() {
     try {
-      const response = await api.get('/analysis/insights');
+      const response = await api.get('/api/analysis/insights');
       return response.data;
     } catch (error) {
       console.error('Failed to fetch insights:', error);
