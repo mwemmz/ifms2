@@ -40,14 +40,20 @@ def get_recommendations():
     try:
         user_id = get_jwt_identity()
         
+        from app.models.user import User
+        user = User.query.get(user_id)
+        if not user or not user.profile:
+            return jsonify({
+                'recommendations': [],
+                'count': 0,
+                'message': 'User profile not set'
+            }), 200
         advisor = FinancialAdvisor(user_id)
         recommendations = advisor.generate_recommendations()
-        
         return jsonify({
             'recommendations': recommendations,
             'count': len(recommendations)
         }), 200
-        
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
@@ -58,11 +64,16 @@ def get_budget_suggestions():
     try:
         user_id = get_jwt_identity()
         
+        from app.models.user import User
+        user = User.query.get(user_id)
+        if not user or not user.profile:
+            return jsonify({
+                'suggestions': [],
+                'message': 'User profile not set'
+            }), 200
         advisor = FinancialAdvisor(user_id)
         suggestions = advisor.get_budget_suggestions()
-        
         return jsonify(suggestions), 200
-        
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
@@ -109,11 +120,16 @@ def get_financial_insights():
     try:
         user_id = get_jwt_identity()
         
+        from app.models.user import User
+        user = User.query.get(user_id)
+        if not user or not user.profile:
+            return jsonify({
+                'insights': {},
+                'message': 'User profile not set'
+            }), 200
         advisor = FinancialAdvisor(user_id)
         insights = advisor.get_financial_insights()
-        
         return jsonify(insights), 200
-        
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 

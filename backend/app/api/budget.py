@@ -16,11 +16,17 @@ def get_monthly_budget():
         month = request.args.get('month', type=int)
         year = request.args.get('year', type=int)
         
+        from app.models.user import User
+        user = User.query.get(user_id)
+        if not user or not user.profile:
+            return jsonify({
+                'summary': {},
+                'category_budgets': {},
+                'message': 'User profile not set'
+            }), 200
         planner = BudgetPlanner(user_id)
         budget = planner.generate_monthly_budget(month, year)
-        
         return jsonify(budget), 200
-        
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
@@ -35,11 +41,18 @@ def compare_budget_actual():
         month = request.args.get('month', type=int)
         year = request.args.get('year', type=int)
         
+        from app.models.user import User
+        user = User.query.get(user_id)
+        if not user or not user.profile:
+            return jsonify({
+                'summary': {},
+                'categories_over_budget': [],
+                'categories_under_budget': [],
+                'message': 'User profile not set'
+            }), 200
         planner = BudgetPlanner(user_id)
         comparison = planner.compare_budget_vs_actual(month, year)
-        
         return jsonify(comparison), 200
-        
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 

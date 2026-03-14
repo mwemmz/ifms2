@@ -23,11 +23,16 @@ def monthly_report():
             month = now.month
             year = now.year
         
+        from app.models.user import User
+        user = User.query.get(user_id)
+        if not user or not user.profile:
+            return jsonify({
+                'report': {},
+                'message': 'User profile not set'
+            }), 200
         generator = ReportGenerator(user_id)
         report = generator.generate_monthly_report(month, year)
-        
         return jsonify(report), 200
-        
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
