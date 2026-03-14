@@ -129,7 +129,8 @@ def get_goal_progress():
         # Get user profile
         from app.models.user import User
         user = User.query.get(user_id)
-        
+        if not user:
+            return jsonify({'error': 'User not found'}), 404
         if not user.profile or not user.profile.savings_goal:
             # Return default progress object
             return jsonify({
@@ -167,7 +168,8 @@ def get_emergency_fund_status():
         # Get user profile
         from app.models.user import User
         user = User.query.get(user_id)
-        
+        if not user:
+            return jsonify({'error': 'User not found'}), 404
         if not user.profile or not user.profile.monthly_salary:
             return jsonify({'error': 'Monthly salary not set'}), 404
         
