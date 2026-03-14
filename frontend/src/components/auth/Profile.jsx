@@ -285,12 +285,8 @@ const Profile = () => {
   };
 
   const formatCurrency = (value) => {
-    return new Intl.NumberFormat('en-US', {
-      style: 'currency',
-      currency: 'USD',
-      minimumFractionDigits: 0,
-      maximumFractionDigits: 0
-    }).format(value || 0);
+    // Display as Kwacha (K) instead of Dollar
+    return `K${parseFloat(value || 0).toLocaleString('en-US', {minimumFractionDigits: 0, maximumFractionDigits: 0})}`;
   };
 
   const getSecurityScoreColor = (score) => {
