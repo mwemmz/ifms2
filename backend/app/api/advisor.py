@@ -131,7 +131,15 @@ def get_goal_progress():
         user = User.query.get(user_id)
         
         if not user.profile or not user.profile.savings_goal:
-            return jsonify({'error': 'No savings goal set'}), 404
+            # Return default progress object
+            return jsonify({
+                'goal_amount': 0,
+                'current_amount': 0,
+                'progress_percentage': 0,
+                'remaining': 0,
+                'on_track': False,
+                'message': 'No savings goal set'
+            }), 200
         
         emergency_fund = advisor._calculate_emergency_fund()
         progress = advisor._calculate_goal_progress()
