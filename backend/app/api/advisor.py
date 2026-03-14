@@ -145,9 +145,7 @@ def get_goal_progress():
         # Get user profile
         from app.models.user import User
         user = User.query.get(user_id)
-        if not user:
-            return jsonify({'error': 'User not found'}), 404
-        if not user.profile or not user.profile.savings_goal:
+        if not user or not user.profile or not user.profile.savings_goal:
             # Return default progress object
             return jsonify({
                 'goal_amount': 0,
@@ -155,18 +153,16 @@ def get_goal_progress():
                 'progress_percentage': 0,
                 'remaining': 0,
                 'on_track': False,
-                'message': 'No savings goal set'
+                'message': 'No savings goal set or user/profile missing'
             }), 200
-        
         emergency_fund = advisor._calculate_emergency_fund()
         progress = advisor._calculate_goal_progress()
-        
         return jsonify({
             'goal_amount': user.profile.savings_goal,
             'current_amount': emergency_fund,
             'progress_percentage': round(progress * 100, 1),
             'remaining': round(max(0, user.profile.savings_goal - emergency_fund), 2),
-            'on_track': progress >= 0.5  # Example threshold
+            'on_track': progress >= 0.5
         }), 200
         
     except Exception as e:
@@ -184,9 +180,7 @@ def get_emergency_fund_status():
         # Get user profile
         from app.models.user import User
         user = User.query.get(user_id)
-        if not user:
-            return jsonify({'error': 'User not found'}), 404
-        if not user.profile or not user.profile.monthly_salary:
+        if not user or not user.profile or not user.profile.monthly_salary:
             # Return default emergency fund object
             return jsonify({
                 'current_amount': 0,
@@ -195,7 +189,7 @@ def get_emergency_fund_status():
                 'target_months': advisor.EMERGENCY_FUND_MONTHS,
                 'target_amount': 0,
                 'status': 'missing',
-                'message': 'Monthly salary not set'
+                'message': 'Monthly salary not set or user/profile missing'
             }), 200
         
         emergency_fund = advisor._calculate_emergency_fund()

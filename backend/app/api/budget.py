@@ -36,11 +36,11 @@ def get_monthly_budget():
         
         from app.models.user import User
         user = User.query.get(user_id)
-        if not user or not user.profile:
+        if not user or not user.profile or not user.profile.monthly_salary:
             return jsonify({
                 'summary': {},
                 'category_budgets': {},
-                'message': 'User profile not set'
+                'message': 'Monthly salary not set or user/profile missing'
             }), 200
         planner = BudgetPlanner(user_id)
         budget = planner.generate_monthly_budget(month, year)
