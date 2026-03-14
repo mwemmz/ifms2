@@ -250,9 +250,5 @@ def get_current_budget_status():
             status['category_status'] = sorted(category_status, key=lambda x: x['percent_used'], reverse=True)
             return jsonify(status), 200
         return jsonify({'error': 'Could not generate budget status'}), 400
-            return jsonify(status), 200
-        
-        return jsonify({'error': 'Could not generate budget status'}), 400
-        
     except Exception as e:
         return jsonify({'error': str(e)}), 500
