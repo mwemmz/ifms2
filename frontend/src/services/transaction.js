@@ -4,7 +4,7 @@ class TransactionService {
   async getTransactions(params = {}) {
     try {
       const queryParams = new URLSearchParams(params).toString();
-      const url = `/transactions${queryParams ? `?${queryParams}` : ''}`;
+      const url = `/api/transactions${queryParams ? `?${queryParams}` : ''}`;
       const response = await api.get(url);
       return response.data;
     } catch (error) {
@@ -15,7 +15,7 @@ class TransactionService {
 
   async getTransaction(id) {
     try {
-      const response = await api.get(`/transactions/${id}`);
+      const response = await api.get(`/api/transactions/${id}`);
       return response.data;
     } catch (error) {
       console.error('Failed to fetch transaction:', error);
@@ -25,7 +25,7 @@ class TransactionService {
 
   async createTransaction(transactionData) {
     try {
-      const response = await api.post('/transactions', transactionData);
+      const response = await api.post('/api/transactions', transactionData);
       return response.data;
     } catch (error) {
       console.error('Failed to create transaction:', error);
@@ -35,7 +35,7 @@ class TransactionService {
 
   async updateTransaction(id, transactionData) {
     try {
-      const response = await api.put(`/transactions/${id}`, transactionData);
+      const response = await api.put(`/api/transactions/${id}`, transactionData);
       return response.data;
     } catch (error) {
       console.error('Failed to update transaction:', error);
@@ -45,7 +45,7 @@ class TransactionService {
 
   async deleteTransaction(id) {
     try {
-      const response = await api.delete(`/transactions/${id}`);
+      const response = await api.delete(`/api/transactions/${id}`);
       return response.data;
     } catch (error) {
       console.error('Failed to delete transaction:', error);
@@ -55,7 +55,7 @@ class TransactionService {
 
   async getCategories() {
     try {
-      const response = await api.get('/transactions/categories');
+      const response = await api.get('/api/transactions/categories');
       return response.data;
     } catch (error) {
       console.error('Failed to fetch categories:', error);
@@ -66,7 +66,7 @@ class TransactionService {
   async getSummary(params = {}) {
     try {
       const queryParams = new URLSearchParams(params).toString();
-      const url = `/transactions/summary${queryParams ? `?${queryParams}` : ''}`;
+      const url = `/api/transactions/summary${queryParams ? `?${queryParams}` : ''}`;
       const response = await api.get(url);
       return response.data;
     } catch (error) {
@@ -77,7 +77,7 @@ class TransactionService {
 
   async getRecentTransactions() {
     try {
-      const response = await api.get('/transactions/recent');
+      const response = await api.get('/api/transactions/recent');
       return response.data;
     } catch (error) {
       console.error('Failed to fetch recent transactions:', error);
