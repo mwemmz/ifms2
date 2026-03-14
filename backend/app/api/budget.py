@@ -11,6 +11,9 @@ budget_bp = Blueprint('budget', __name__)
 def get_monthly_budget():
     """Generate monthly budget"""
     try:
+        user_id = get_jwt_identity()
+        month = request.args.get('month', type=int)
+        year = request.args.get('year', type=int)
         user = User.query.get(user_id)
         if not user or not user.profile or not user.profile.monthly_salary:
             # Return default status object
@@ -27,20 +30,6 @@ def get_monthly_budget():
                 'percent_time_passed': 0,
                 'category_status': [],
                 'message': 'Monthly salary not set. Please update your profile.'
-            }), 200
-        user_id = get_jwt_identity()
-        
-        # Get query parameters
-        month = request.args.get('month', type=int)
-        year = request.args.get('year', type=int)
-        
-        from app.models.user import User
-        user = User.query.get(user_id)
-        if not user or not user.profile or not user.profile.monthly_salary:
-            return jsonify({
-                'summary': {},
-                'category_budgets': {},
-                'message': 'Monthly salary not set or user/profile missing'
             }), 200
         planner = BudgetPlanner(user_id)
         budget = planner.generate_monthly_budget(month, year)
