@@ -4,7 +4,7 @@ class ProfileService {
   // Get user profile from backend
   async getProfile() {
     try {
-      const response = await api.get('/auth/profile');
+      const response = await api.get('/api/auth/profile');
       return response.data;
     } catch (error) {
       console.error('Failed to fetch profile:', error);
@@ -15,7 +15,7 @@ class ProfileService {
   // Update user profile
   async updateProfile(profileData) {
     try {
-      const response = await api.put('/auth/update-profile', profileData);
+      const response = await api.put('/api/auth/update-profile', profileData);
       return response.data;
     } catch (error) {
       console.error('Failed to update profile:', error);
@@ -26,7 +26,7 @@ class ProfileService {
   // Setup MFA
   async setupMFA() {
     try {
-      const response = await api.post('/auth/setup-mfa');
+      const response = await api.post('/api/auth/setup-mfa');
       return response.data;
     } catch (error) {
       console.error('Failed to setup MFA:', error);
@@ -37,7 +37,7 @@ class ProfileService {
   // Verify MFA token
   async verifyMFA(token) {
     try {
-      const response = await api.post('/auth/verify-mfa', { token });
+      const response = await api.post('/api/auth/verify-mfa', { token });
       return response.data;
     } catch (error) {
       console.error('Failed to verify MFA:', error);
@@ -48,7 +48,7 @@ class ProfileService {
   // Disable MFA
   async disableMFA() {
     try {
-      const response = await api.post('/auth/disable-mfa');
+      const response = await api.post('/api/auth/disable-mfa');
       return response.data;
     } catch (error) {
       console.error('Failed to disable MFA:', error);
@@ -59,7 +59,7 @@ class ProfileService {
   // Get security status
   async getSecurityStatus() {
     try {
-      const response = await api.get('/security/status');
+      const response = await api.get('/api/security/status');
       return response.data;
     } catch (error) {
       console.error('Failed to fetch security status:', error);
@@ -70,7 +70,7 @@ class ProfileService {
   // Get active sessions
   async getActiveSessions() {
     try {
-      const response = await api.get('/security/sessions');
+      const response = await api.get('/api/security/sessions');
       return response.data;
     } catch (error) {
       console.error('Failed to fetch active sessions:', error);

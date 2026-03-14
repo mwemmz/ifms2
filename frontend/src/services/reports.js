@@ -63,7 +63,7 @@ class ReportsService {
 
   async getDashboard() {
     try {
-      const response = await api.get('/reports/dashboard');
+      const response = await api.get('/api/reports/dashboard');
       return response.data;
     } catch (error) {
       console.error('Failed to fetch dashboard:', error);
@@ -73,7 +73,7 @@ class ReportsService {
 
   async getAvailableReports() {
     try {
-      const response = await api.get('/reports/available-reports');
+      const response = await api.get('/api/reports/available-reports');
       return response.data;
     } catch (error) {
       console.error('Failed to fetch available reports:', error);
