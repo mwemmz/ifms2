@@ -354,7 +354,7 @@ const Profile = () => {
                 <div className="form-group">
                   <label className="form-label">Monthly Salary</label>
                   <div className="input-with-icon">
-                    <DollarSign size={18} className="input-icon" />
+                    <span className="input-icon" style={{fontWeight: 'bold', fontSize: '18px'}}>K</span>
                     <input
                       type="number"
                       name="monthly_salary"
@@ -371,7 +371,7 @@ const Profile = () => {
                 <div className="form-group">
                   <label className="form-label">Savings Goal</label>
                   <div className="input-with-icon">
-                    <Target size={18} className="input-icon" />
+                    <span className="input-icon" style={{fontWeight: 'bold', fontSize: '18px'}}>K</span>
                     <input
                       type="number"
                       name="savings_goal"
