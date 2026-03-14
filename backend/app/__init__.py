@@ -21,16 +21,16 @@ def create_app():
     app.config['JWT_SECRET_KEY'] = 'jwt-secret-key-change-in-production'
     app.config['JWT_ACCESS_TOKEN_EXPIRES'] = timedelta(hours=1)
     
-        # Configure CORS for local and Render frontend
-        CORS(app,
-            origins=[
-              "http://localhost:3000",
-              "http://127.0.0.1:3000",
-              "https://ifms2-22.onrender.com"
-            ],
-            supports_credentials=True,
-            allow_headers=["Content-Type", "Authorization"],
-            methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"])
+    # Configure CORS for local and Render frontend
+    CORS(app,
+        origins=[
+            "http://localhost:3000",
+            "http://127.0.0.1:3000",
+            "https://ifms2-22.onrender.com"
+        ],
+        supports_credentials=True,
+        allow_headers=["Content-Type", "Authorization"],
+        methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"])
     
     # Initialize extensions with app
     db.init_app(app)
