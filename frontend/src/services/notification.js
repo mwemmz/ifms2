@@ -5,7 +5,7 @@ class NotificationService {
     try {
       // In a real app, this would fetch from a notifications endpoint
       // For now, we'll generate sample notifications based on app state
-      const response = await api.get('/advice/insights');
+      const response = await api.get('/api/advice/insights');
       const insights = response.data;
       
       return this.generateNotifications(insights);
