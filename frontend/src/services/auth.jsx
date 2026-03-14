@@ -5,7 +5,7 @@ class AuthService {
   async register(userData) {
     try {
       console.log('📝 Register attempt with:', { ...userData, password: '[HIDDEN]' });
-      const response = await api.post('/auth/register', userData);
+      const response = await api.post('/api/auth/register', userData);
       console.log('✅ Register response:', response.data);
       
       if (response.data) {
@@ -25,7 +25,7 @@ class AuthService {
       console.log('🔐 Step 1: Sending login request for:', credentials.username);
       console.log('   Password provided:', credentials.password ? '✓ Yes' : '✗ No');
       
-      const response = await api.post('/auth/login', credentials);
+      const response = await api.post('/api/auth/login', credentials);
       
       console.log('🔐 Step 2: Login response received');
       console.log('   Status:', response.status);
@@ -99,7 +99,7 @@ class AuthService {
         return;
       }
       
-      const response = await api.post('/auth/verify-mfa', 
+      const response = await api.post('/api/auth/verify-mfa', 
         { token },
         { headers: { Authorization: `Bearer ${tempToken}` } }
       );
@@ -137,7 +137,7 @@ class AuthService {
         return null;
       }
       
-      const response = await api.get('/auth/profile');
+      const response = await api.get('/api/auth/profile');
       console.log('👤 Profile response:', response.data);
       return response.data;
     } catch (error) {
@@ -160,7 +160,7 @@ class AuthService {
   async updateProfile(profileData) {
     try {
       console.log('📝 Updating profile with:', profileData);
-      const response = await api.put('/auth/update-profile', profileData);
+      const response = await api.put('/api/auth/update-profile', profileData);
       
       if (response.data) {
         console.log('✅ Profile updated, refreshing user data');
@@ -180,7 +180,7 @@ class AuthService {
   async setupMFA() {
     try {
       console.log('🔐 Setting up MFA...');
-      const response = await api.post('/auth/setup-mfa');
+      const response = await api.post('/api/auth/setup-mfa');
       console.log('✅ MFA setup response received');
       return response.data;
     } catch (error) {
@@ -194,7 +194,7 @@ class AuthService {
   async disableMFA() {
     try {
       console.log('🔐 Disabling MFA...');
-      const response = await api.post('/auth/disable-mfa');
+      const response = await api.post('/api/auth/disable-mfa');
       console.log('✅ MFA disabled');
       toast.success('MFA disabled successfully');
       return response.data;
